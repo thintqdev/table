@@ -34,5 +34,12 @@ Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
     Route::prefix('shops')->controller(ShopController::class)->group(function () {
         Route::post('/', 'create');
         Route::get('/', 'index');
+        Route::put('/{shop}', 'update');
+        Route::delete('/{shop}', 'destroy');
+        Route::get('/{shop}', 'show');
     });
+
+    // Category
+    
+
 });

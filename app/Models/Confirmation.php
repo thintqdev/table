@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Confirmation extends Eloquent
+class Confirmation extends Model
 {
     use HasFactory;
 

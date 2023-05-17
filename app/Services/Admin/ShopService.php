@@ -13,24 +13,18 @@ class ShopService extends AbstractService
         return $shop;
     }
 
-    public function getShops($status, $search, $sortBy, $sortType, $limit)
+    public function getShops($status, $sortBy, $sortType, $limit, $search = '')
     {
-        $shops = Shop::query();
-        if (!empty($status)) {
-            $shops->whereIn('status', $status);
-        }
+        $shops = Shop::whereIn('status', $status ?? array_values(Shop::STATUS))
+            ->where('shop_name', 'LIKE', '%' . $search . '%')
+            ->orderBy($sortBy ?? 'created_at', $sortType ?? 'desc')
+            ->paginate($limit ?? 10);
 
-        // if (!empty($search)) {
-        //     $shops->where('shop_name', 'LIKE', '%' . $search . '%');
-        // }
-
-        // if ($sortBy) {
-        //     $shops->sortBy($sortBy, $sortType);
-        // } else {
-        //     $shops->sortBy('created_at', 'desc');
-        // }
-
-        $shops->paginate($limit ?? 10);
         return $shops;
+    }
+
+    public function updateShop($shop, $data)
+    {
+        return $shop->update($data);
     }
 }
