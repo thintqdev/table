@@ -18,7 +18,7 @@ class ShopService extends AbstractService
         $shops = Shop::whereIn('status', $status ?? array_values(Shop::STATUS))
             ->where('shop_name', 'LIKE', '%' . $search . '%')
             ->orderBy($sortBy ?? 'created_at', $sortType ?? 'desc')
-            ->paginate($limit ?? 10);
+            ->paginate($limit ?? config('const.paginate'));
 
         return $shops;
     }

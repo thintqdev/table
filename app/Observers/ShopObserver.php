@@ -21,7 +21,8 @@ class ShopObserver
         $user = User::create([
             'name' => $shop->representative_name,
             'email' => $shop->email,
-            'password' => bcrypt($password)
+            'password' => bcrypt($password),
+            'shop_id' => $shop->id,
         ]);
         $data = $shop->toArray();
         $data['password'] = $password;

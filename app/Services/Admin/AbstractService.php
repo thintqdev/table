@@ -2,7 +2,12 @@
 
 namespace App\Services\Admin;
 
+use Auth;
+
 class AbstractService
 {
-    
+    public function user()
+    {
+        return Auth::user();
+    }
 }

@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->nullable();
-            $table->unsignedBigInteger('shop_id')->nullable();
+        Schema::table('users', function (Blueprint $table) {
+            $table->unsignedBigInteger('shop_id')->after('password')->nullable();
             $table->foreign('shop_id')->references('id')->on('shops');
-            $table->boolean('is_active')->default(1);
-            $table->timestamps();
         });
     }
 
@@ -30,6 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign('users_shop_id_foreign');
+            $table->dropColumn('shop_id');
+        });
     }
 };

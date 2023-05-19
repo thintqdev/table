@@ -29,4 +29,9 @@ class Shop extends Model
     {
         return $this->morphMany(Upload::class, 'uploadable');
     }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 }
