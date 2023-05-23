@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->decimal('price', 8, 2);
+            $table->integer('price');
             $table->unsignedBigInteger('shop_id');
             $table->integer('rating')->default(0);
-            $table->string('status');
+            $table->string('status')->default('active');
             $table->softDeletes();
             $table->timestamps();
             $table->foreign('shop_id')->references('id')->on('shops');

@@ -48,5 +48,5 @@ Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
 
     // Product
     Route::post('/products/upload', [ProductController::class, 'uploadMediaProduct']);
-
+    Route::resource('products', ProductController::class)->except(['edit', 'create']);
 });
