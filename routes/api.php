@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ShopController;
 use Illuminate\Support\Facades\Route;
@@ -44,5 +45,8 @@ Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
     Route::post('/categories/update-many', [CategoryController::class, 'updateStatusCategories']);
     Route::post('/categories/delete-many', [CategoryController::class, 'deleteCategories']);
     Route::resource('categories', CategoryController::class)->except(['edit', 'create']);
+
+    // Product
+    Route::post('/products/upload', [ProductController::class, 'uploadMediaProduct']);
 
 });

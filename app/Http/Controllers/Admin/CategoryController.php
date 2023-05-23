@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Services\Admin\CategoryService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -18,6 +19,8 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
+        $a = new Carbon('2023-05-23 09:29:00');
+        $a = $a->format('Ymd His');
         $search = $request->get('search');
         $limit = $request->get('limit');
 

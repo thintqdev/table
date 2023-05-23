@@ -13,6 +13,8 @@ class Product extends Model
 
     protected $table = 'products';
 
+    public const PRODUCT_FOLDER = 'products/';
+
     protected $fillable = [
         'name',
         'description',

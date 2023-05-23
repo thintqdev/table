@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\S3Service;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\ServiceProvider;
 use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;

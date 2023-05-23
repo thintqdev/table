@@ -10,6 +10,7 @@ return [
             'expire' => 'Code is expired, please retry',
             'user_deleted' => 'User has been deleted' 
         ],
-        'success_change_password' => 'Change password successfully'
+        'success_change_password' => 'Change password successfully',
+        'success_upload_image' => 'Upload image product successfully'
     ]
 ];
