@@ -10,4 +10,9 @@ class AbstractService
     {
         return Auth::user();
     }
+
+    public function userShop()
+    {
+        return $this->user()->shop_id;
+    }
 }

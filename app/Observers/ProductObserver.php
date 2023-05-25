@@ -15,14 +15,11 @@ class ProductObserver
      */
     public function created(Product $product)
     {
-        $upload = Upload::where('temporary_id', request('uuid'))->firstOrFail();
-        if ($upload) {
-            $upload->update([
-                'uploadable_id' => $product->id,
-                'uploadable_type' => Product::class,
-                'temporary_id' => null
-            ]);
-        }
+        Upload::where('temporary_id', request('uuid'))->update([
+            'uploadable_id' => $product->id,
+            'uploadable_type' => Product::class,
+            'temporary_id' => null
+        ]);
     }
 
     /**

@@ -19,8 +19,6 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
-        $a = new Carbon('2023-05-23 09:29:00');
-        $a = $a->format('Ymd His');
         $search = $request->get('search');
         $limit = $request->get('limit');
 

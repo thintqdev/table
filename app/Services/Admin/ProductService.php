@@ -6,9 +6,22 @@ use App\Models\Product;
 
 class ProductService extends AbstractService
 {
-    public function getProducts($condition, $search, $limit, $sortField, $sortBy)
+    public function getProducts($search, $limit, $sortBy, $sortType)
     {
-        $products = Product::where($condition);
+        $query = Product::with('shop')->where('name', 'LIKE', '%' . $search . '%');
+
+        if ($this->userShop()) {
+            $query->where('shop_id', $this->userShop());
+        }
+
+        $products = $query->orderBy($sortBy ?? 'created_at', $sortType ?? 'desc')
+            ->paginate($limit ?? config('const.paginate'));
+
+        $products->getCollection()->each(function ($product) {
+            $product->append('media')->makeHidden('uploads');
+        });
+
+        return $products;
     }
 
     public function createProduct($data)

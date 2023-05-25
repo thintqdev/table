@@ -26,7 +26,7 @@ class ProductController extends Controller
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
                 $result = $this->s3Service->uploadFile($file, Product::PRODUCT_FOLDER, $request->uuid);
-    
+
                 return response()->apiSuccess($result, __('message.admin.success_upload_image'));
             }
         } catch (\Exception $e) {
@@ -37,7 +37,13 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
+        $search = $request->get('search');
+        $limit = $request->get('limit');
+        $sortBy = $request->get('sort_by');
+        $sortType = $request->get('sort_type');
+        $products = $this->productService->getProducts($search, $limit, $sortBy, $sortType);
 
+        return response()->apiSuccess($products);
     }
 
     public function store(Request $request)
@@ -47,17 +53,14 @@ class ProductController extends Controller
         return response()->apiSuccess($product);
     }
 
-    public function show(Product $product) {
+    public function show(Product $product)
+    {
         return response()->apiSuccess($product->append('media')->makeHidden('uploads'));
     }
 
     public function update(Request $request)
-    {
-        
-    }
+    { }
 
     public function delete(Request $request)
-    {
-        
-    }
+    { }
 }
