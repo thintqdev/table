@@ -18,7 +18,7 @@ class ProductService extends AbstractService
             ->paginate($limit ?? config('const.paginate'));
 
         $products->getCollection()->each(function ($product) {
-            $product->append('media')->makeHidden('uploads');
+            $product->append(['media', 'shop_name'])->makeHidden(['uploads', 'shop']);
         });
 
         return $products;

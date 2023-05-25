@@ -41,4 +41,11 @@ class Product extends Model
             return $this->uploads;
         });
     }
+
+    public function shopName(): Attribute
+    {
+        return Attribute::make(function () {
+            return $this->shop->shop_name;
+        });
+    }
 }

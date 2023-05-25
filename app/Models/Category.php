@@ -18,10 +18,6 @@ class Category extends Model
         'is_active'
     ];
 
-    // protected $appends = ['shop_name'];
-
-    // protected $hidden = ['shop'];
-
     public function shop()
     {
         return $this->belongsTo(Shop::class);
