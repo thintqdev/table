@@ -14,6 +14,7 @@ class ShopController extends Controller
     public function __construct(ShopService $shopService)
     {
         $this->shopService = $shopService;
+        $this->authorizeResource(Shop::class);
     }
 
     public function create(Request $request)
