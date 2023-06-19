@@ -10,4 +10,10 @@ class Permission extends SpatiePermission
 {
     use HasFactory;
 
+    protected $table = 'permissions';
+
+    protected $fillable = [
+        'name',
+        'guard_name'
+    ];
 }

@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -41,12 +42,21 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (NotFoundHttpException $e, $request) {
-            if ($request->is('api/*')) {
+            if ($request->wantsJson() || $request->is('api/*')) {
+                return response()->json(['message' => 'The requested link does not exist'], 400);
+            }
+        });
+
+        $this->renderable(function (ModelNotFoundException $e, $request) {
+            if ($request->wantsJson() || $request->is('api/*')) {
                 return response()->apiError('valiadation.exeption', 'Object not found', 404);
             }
         });
 
-        $this->renderable(function (AccessDeniedHttpException $e) {
+        $this->renderable(function (AccessDeniedHttpException $e, $request) {
+            if ($request->wantsJson() || $request->is('api/*')) {
+                return response()->json($e->getMessage(), 403);
+            }
         });
     }
 }

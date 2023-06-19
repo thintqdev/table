@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Shop;
 use App\Models\User;
-use Auth;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ShopPolicy
@@ -42,7 +41,7 @@ class ShopPolicy
      */
     public function create(User $user)
     {
-        if (Auth::user()->shop_id) {
+        if ($user->shop_id) {
             return false;
         }
 

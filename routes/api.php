@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ShopController;
@@ -26,6 +27,9 @@ Route::prefix('admin/auth')->controller(AdminAuthController::class)->group(funct
 });
 
 Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
+    // Permission
+    Route::post('/permissions/assign', [PermissionController::class, 'assignPermissionToRole']);
+    Route::resource('permissions', PermissionController::class)->except(['edit', 'create']);
 
     // Profile
     Route::prefix('profile')->controller(ProfileController::class)->group(function () {
