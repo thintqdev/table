@@ -41,6 +41,7 @@ class ShopPolicy
      */
     public function create(User $user)
     {
+        dd($user->shop_id);
         if ($user->shop_id) {
             return false;
         }

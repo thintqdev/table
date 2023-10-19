@@ -34,4 +34,9 @@ class Shop extends Model
     {
         return $this->hasMany(Category::class);
     }
+
+    public function qrStamps()
+    {
+        return $this->hasMany(QRStamp::class);
+    }
 }

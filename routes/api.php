@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\QRStampController;
 use App\Http\Controllers\Admin\ShopController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,4 +54,7 @@ Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
     // Product
     Route::post('/products/upload', [ProductController::class, 'uploadMediaProduct']);
     Route::resource('products', ProductController::class)->except(['edit', 'create']);
+
+    // QrStamp
+    Route::resource('qr-stamps', QRStampController::class)->except(['edit', 'create']);
 });

@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Models\Product;
+use App\Models\QRStamp;
 use App\Models\Shop;
 use App\Observers\ProductObserver;
+use App\Observers\QRStampObserver;
 use App\Observers\ShopObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -41,6 +43,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $observers = [
         Shop::class => [ShopObserver::class],
-        Product::class => [ProductObserver::class]
+        Product::class => [ProductObserver::class],
+        QRStamp::class => [QRStampObserver::class],
     ];
 }

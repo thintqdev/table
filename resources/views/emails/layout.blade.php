@@ -52,7 +52,7 @@
 <body>
     <div class="email-container">
         <div class="header">
-            <h1>Table - Website order cho mọi shop</h1>
+            <h1>Table - Tận tâm, tận tình, tận hưởng</h1>
         </div>
         <div class="content">
             @yield('content')
