@@ -20,7 +20,7 @@ class Shop extends Model
     ];
 
     protected $fillable = [
-        'shop_name', 'description', 'address', 'phone', 'fax', 'facebook_url', 'email', 'representative_name', 'status'
+        'shop_name', 'description', 'address', 'phone', 'fax', 'facebook_url', 'email', 'representative_name', 'status', 'owner_id'
     ];
 
     protected $hidden = ['password'];

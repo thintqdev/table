@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OwnerController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -57,4 +58,7 @@ Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
 
     // QrStamp
     Route::resource('qr-stamps', QRStampController::class)->except(['edit', 'create']);
+
+    // Owner
+    Route::resource('owners', OwnerController::class);
 });

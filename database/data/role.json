@@ -2,21 +2,21 @@
     {
         "id": 1,
         "name": "admin",
-        "guard_name": "sanctum"
+        "guard_name": "api"
     },
     {
         "id": 2,
         "name": "owner",
-        "guard_name": "sanctum"
+        "guard_name": "api"
     },
     {
         "id": 3,
         "name": "staff",
-        "guard_name": "sanctum"
+        "guard_name": "api"
     },
     {
         "id":4,
         "name": "customer",
-        "guard_name": "sanctum"
+        "guard_name": "api"
     }
 ]

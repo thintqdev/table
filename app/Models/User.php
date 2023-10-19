@@ -15,7 +15,7 @@ class User extends Authenticatable
     use HasRoles;
 
 
-    protected $guard = 'sanctum';
+    protected $guard_name = 'api';
     /**
      * The attributes that are mass assignable.
      *
