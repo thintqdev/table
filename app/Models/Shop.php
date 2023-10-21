@@ -20,7 +20,13 @@ class Shop extends Model
     ];
 
     protected $fillable = [
-        'shop_name', 'description', 'address', 'phone', 'fax', 'facebook_url', 'email', 'representative_name', 'status', 'owner_id'
+        'shop_name', 'description', 'address', 'phone', 'fax', 'facebook_url', 'email', 'representative_name', 'status', 'owner_id',
+        'latitude', 'longitude', 'open_hour', 'close_hour'
+    ];
+
+    protected $casts = [
+        'open_hour' => 'time',
+        'close_hour' => 'time',
     ];
 
     protected $hidden = ['password'];
