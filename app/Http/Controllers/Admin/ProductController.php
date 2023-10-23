@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     protected $s3Service;
+
     protected $productService;
 
     public function __construct(S3Service $s3Service, ProductService $productService)
@@ -31,6 +32,7 @@ class ProductController extends Controller
             }
         } catch (\Exception $e) {
             logger('ERROR_UPLOAD', [$e->getMessage()]);
+
             return response()->apiError([], $e->getMessage());
         }
     }
@@ -59,8 +61,10 @@ class ProductController extends Controller
     }
 
     public function update(Request $request)
-    { }
+    {
+    }
 
     public function delete(Request $request)
-    { }
+    {
+    }
 }

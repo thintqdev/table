@@ -8,7 +8,7 @@ class ProductService extends AbstractService
 {
     public function getProducts($search, $limit, $sortBy, $sortType)
     {
-        $query = Product::with('shop')->where('name', 'LIKE', '%' . $search . '%');
+        $query = Product::with('shop')->where('name', 'LIKE', '%'.$search.'%');
 
         if ($this->userShop()) {
             $query->where('shop_id', $this->userShop());

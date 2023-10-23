@@ -2,28 +2,29 @@
 
 namespace App\Jobs;
 
-use App\Mail\InviteShopMail;
+use App\Imports\TableImport;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Mail;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
-class InviteShopMailJob implements ShouldQueue
+class ImportCsvTableJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $data;
-
+    protected $filePath;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($filePath)
     {
-        $this->data = $data;
+        $this->$filePath = $filePath;
     }
 
     /**
@@ -33,7 +34,7 @@ class InviteShopMailJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->data['email'])
-            ->send(new InviteShopMail($this->data));
+        $file = Storage::disk('s3')->get($this->filePath);
+        Excel::import(new TableImport, $file);
     }
 }

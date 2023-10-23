@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\QRStampController;
 use App\Http\Controllers\Admin\ShopController;
+use App\Http\Controllers\Admin\TableController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -61,4 +62,7 @@ Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
 
     // Owner
     Route::resource('owners', OwnerController::class);
+
+    // Table
+    Route::post('/tables/import', [TableController::class, 'import']);
 });

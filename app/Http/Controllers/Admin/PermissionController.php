@@ -21,9 +21,9 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $input['guard_name'] = 'sanctum';
+        $input['guard_name'] = 'api';
 
-        $permission = Permission::create($request->all());
+        $permission = Permission::create($input);
 
         return response()->apiSuccess($permission);
     }
@@ -45,7 +45,6 @@ class PermissionController extends Controller
     public function assignPermissionToRole(Request $request)
     {
         $role = Role::findById($request->role_id);
-
         $role->permissions()->sync($request->permission_ids);
 
         return response()->apiSuccess(true);

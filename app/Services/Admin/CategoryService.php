@@ -17,9 +17,9 @@ class CategoryService extends AbstractService
 
     public function getCategories($search, $limit)
     {
-        $query = Category::with('shop')->where('name', 'LIKE', '%' . $search . '%');
+        $query = Category::with('shop')->where('name', 'LIKE', '%'.$search.'%');
 
-        if (!is_null($this->user()->shop_id)) {
+        if (! is_null($this->user()->shop_id)) {
             $query->where('shop_id', $this->user()->shop_id);
         }
 
@@ -45,7 +45,7 @@ class CategoryService extends AbstractService
     public function updateStatusCategories($categoryIds, $status)
     {
         Category::whereIn('id', $categoryIds)->update([
-            'is_active' => $status
+            'is_active' => $status,
         ]);
     }
 }

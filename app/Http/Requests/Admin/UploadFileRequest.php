@@ -25,7 +25,7 @@ class UploadFileRequest extends FormRequest
     {
         return [
             'file' => 'required',
-            'uuid' => 'nullable'
+            'uuid' => 'nullable',
         ];
     }
 }

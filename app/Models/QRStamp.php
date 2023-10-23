@@ -21,7 +21,7 @@ class QRStamp extends Model
         'one_time_flag',
         'started_at',
         'ended_at',
-        'sha256_hash'
+        'sha256_hash',
     ];
 
     public function shop()
@@ -36,11 +36,13 @@ class QRStamp extends Model
         });
     }
 
-    public function upload() {
-        return $this->morphOne(Upload::class,'uploadable');
+    public function upload()
+    {
+        return $this->morphOne(Upload::class, 'uploadable');
     }
 
-    public function qrStampUrl():Attribute {
+    public function qrStampUrl(): Attribute
+    {
         return Attribute::make(function () {
             return $this->upload->temporary_url;
         });

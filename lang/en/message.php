@@ -8,9 +8,9 @@ return [
         'fail_reset_password' => [
             'wrong_code' => 'Code is wrong, please retry',
             'expire' => 'Code is expired, please retry',
-            'user_deleted' => 'User has been deleted' 
+            'user_deleted' => 'User has been deleted',
         ],
         'success_change_password' => 'Change password successfully',
-        'success_upload_image' => 'Upload image product successfully'
-    ]
+        'success_upload_image' => 'Upload image product successfully',
+    ],
 ];

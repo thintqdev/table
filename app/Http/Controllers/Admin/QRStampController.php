@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Services\Admin\QRStampService;
+use Illuminate\Http\Request;
 
 class QRStampController extends Controller
 {

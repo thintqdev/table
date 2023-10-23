@@ -2,11 +2,9 @@
 
 namespace App\Providers;
 
-use App\Services\S3Service;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\ServiceProvider;
 use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
-use Illuminate\Validation\ValidationException;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             return response()->json([
                 'status' => true,
                 'data' => $data,
-                'message' => $message
+                'message' => $message,
             ], $code);
         });
 
@@ -42,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
             return response()->json([
                 'status' => false,
                 'errors' => $errors,
-                'message' => $message
+                'message' => $message,
             ], $code);
         });
     }

@@ -9,7 +9,9 @@ use App\Services\S3Service;
 class QRStampObserver
 {
     protected $qrStampService;
+
     protected $s3Service;
+
     public function __construct(QRStampService $qrStampService, S3Service $s3Service)
     {
         $this->s3Service = $s3Service;
@@ -19,7 +21,6 @@ class QRStampObserver
     /**
      * Handle the QRStamp "created" event.
      *
-     * @param  \App\Models\QRStamp  $qrStamp
      * @return void
      */
     public function created(QRStamp $qrStamp)
@@ -38,7 +39,6 @@ class QRStampObserver
     /**
      * Handle the QRStamp "updated" event.
      *
-     * @param  \App\Models\QRStamp  $qrStamp
      * @return void
      */
     public function updated(QRStamp $qrStamp)
@@ -49,7 +49,6 @@ class QRStampObserver
     /**
      * Handle the QRStamp "deleted" event.
      *
-     * @param  \App\Models\QRStamp  $qrStamp
      * @return void
      */
     public function deleted(QRStamp $qrStamp)
@@ -60,7 +59,6 @@ class QRStampObserver
     /**
      * Handle the QRStamp "restored" event.
      *
-     * @param  \App\Models\QRStamp  $qrStamp
      * @return void
      */
     public function restored(QRStamp $qrStamp)
@@ -71,7 +69,6 @@ class QRStampObserver
     /**
      * Handle the QRStamp "force deleted" event.
      *
-     * @param  \App\Models\QRStamp  $qrStamp
      * @return void
      */
     public function forceDeleted(QRStamp $qrStamp)

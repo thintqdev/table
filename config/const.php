@@ -2,7 +2,7 @@
 
 return [
     'auth' => [
-        'forgot_password_time' => 30
+        'forgot_password_time' => 30,
     ],
-    'paginate' => 10
+    'paginate' => 10,
 ];

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ChangePasswordRequest;
 use App\Http\Requests\Admin\ForgotPasswordRequest;
 use App\Http\Requests\Admin\LoginRequest;
 use App\Http\Requests\Admin\ResetPasswordRequest;
@@ -11,10 +10,8 @@ use App\Jobs\SendForgotPasswordMailJob;
 use App\Models\Confirmation;
 use App\Models\User;
 use App\Repositories\UserRepository;
-use Auth;
 use Carbon\Carbon;
 use Hash;
-use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -29,11 +26,11 @@ class AuthController extends Controller
     {
         $user = $this->userRepository->findByEmail($request->email);
 
-        if (!$user) {
+        if (! $user) {
             return response()->apiError([], __('auth.failed'));
         }
 
-        if (!Hash::check($request->password, $user->password)) {
+        if (! Hash::check($request->password, $user->password)) {
             return response()->apiError([], __('auth.password'));
         }
 
@@ -46,7 +43,7 @@ class AuthController extends Controller
     {
         $user = $this->userRepository->findByEmail($request->email);
 
-        if (!$user) {
+        if (! $user) {
             return response()->apiError([], __('auth.failed'));
         }
 
@@ -57,11 +54,11 @@ class AuthController extends Controller
                 'code' => random_int(100000, 999999),
                 'expires_at' => Carbon::now()->addMinutes(config('const.auth.forgot_password_time')),
                 'name' => $user->name,
-                'email' => $user->email
+                'email' => $user->email,
             ];
 
             Confirmation::updateOrCreate([
-                'confirmable_id' => $user->id
+                'confirmable_id' => $user->id,
             ], $data);
             dispatch(new SendForgotPasswordMailJob($data));
 
@@ -78,7 +75,7 @@ class AuthController extends Controller
         $confirmation = Confirmation::where('confirmable_type', Confirmation::CONFIRMABLE_TYPE['FORGOT_PASSWORD'])
             ->where('code', $request->code)->first();
 
-        if (!$confirmation) {
+        if (! $confirmation) {
             return response()->apiError([], __('message.admin.fail_reset_password.wrong_code'));
         }
 
@@ -88,11 +85,11 @@ class AuthController extends Controller
 
         $user = User::find($confirmation->confirmable_id);
 
-        if (!$user) {
+        if (! $user) {
             return response()->apiError([], __('message.admin.fail_reset_password.user_deleted'));
         }
         $user->update([
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
         ]);
         $confirmation->delete();
 

@@ -8,9 +8,12 @@ use Spatie\Permission\Models\Role as SpatieRole;
 class Role extends SpatieRole
 {
     use HasFactory;
-
+    protected $guard_name = 'api';
     public const ADMIN = 'admin';
+
     public const OWNER = 'owner';
+
     public const STAFF = 'staff';
+
     public const CUSTOMER = 'customer';
 }

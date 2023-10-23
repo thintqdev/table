@@ -13,13 +13,12 @@ class ShopObserver
     /**
      * Handle the Shop "created" event.
      *
-     * @param  \App\Models\Shop  $shop
      * @return void
      */
     public function created(Shop $shop)
     {
         $password = Str::random();
-        if (!request('is_only_shop')) {
+        if (! request('is_only_shop')) {
             $user = User::create([
                 'name' => $shop->representative_name,
                 'email' => $shop->email,
@@ -37,7 +36,6 @@ class ShopObserver
     /**
      * Handle the Shop "updated" event.
      *
-     * @param  \App\Models\Shop  $shop
      * @return void
      */
     public function updated(Shop $shop)
@@ -48,7 +46,6 @@ class ShopObserver
     /**
      * Handle the Shop "deleted" event.
      *
-     * @param  \App\Models\Shop  $shop
      * @return void
      */
     public function deleted(Shop $shop)
@@ -59,7 +56,6 @@ class ShopObserver
     /**
      * Handle the Shop "restored" event.
      *
-     * @param  \App\Models\Shop  $shop
      * @return void
      */
     public function restored(Shop $shop)
@@ -70,7 +66,6 @@ class ShopObserver
     /**
      * Handle the Shop "force deleted" event.
      *
-     * @param  \App\Models\Shop  $shop
      * @return void
      */
     public function forceDeleted(Shop $shop)

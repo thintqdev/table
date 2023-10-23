@@ -1,14 +1,17 @@
 <?php
 
 namespace App\Services\Admin;
+
 use App\Models\QRStamp;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-class QRStampService extends AbstractService {
-    public function getQRStamps($search, $limit) {
-        $query = QRStamp::with('shop')->where('title', 'LIKE', '%' . $search . '%');
+class QRStampService extends AbstractService
+{
+    public function getQRStamps($search, $limit)
+    {
+        $query = QRStamp::with('shop')->where('title', 'LIKE', '%'.$search.'%');
 
-        if (!is_null($this->user()->shop_id)) {
+        if (! is_null($this->user()->shop_id)) {
             $query->where('shop_id', $this->user()->shop_id);
         }
 
@@ -21,7 +24,8 @@ class QRStampService extends AbstractService {
         return $qrStamps;
     }
 
-    public function createQrstamp($data) {
+    public function createQrstamp($data)
+    {
         $data['sha256_hash'] = hash_hmac('sha256', now(), false);
         $data['shop_id'] = $this->user()->shop_id;
 
@@ -30,7 +34,8 @@ class QRStampService extends AbstractService {
         return $stamps;
     }
 
-    public function generateQRCode($qrStampId) {
+    public function generateQRCode($qrStampId)
+    {
         $qrStamp = QRStamp::where('id', $qrStampId)->firstOrFail();
 
         $qrCode = QrCode::format('png')

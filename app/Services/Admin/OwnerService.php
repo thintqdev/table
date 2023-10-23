@@ -9,12 +9,13 @@ use Illuminate\Support\Str;
 
 class OwnerService
 {
-    public function inviteOwner($data) {
+    public function inviteOwner($data)
+    {
         $data['password'] = Str::random();
         $owner = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password'])
+            'password' => bcrypt($data['password']),
         ]);
         $owner->assignRole(Role::OWNER);
         dispatch(new InviteOwnerMailJob($data));

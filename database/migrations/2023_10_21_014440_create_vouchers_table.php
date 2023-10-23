@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('title', 50);
             $table->string('content', 255);
+            $table->unsignedBigInteger('shop_id')->nullable();
+            $table->foreign('shop_id')->references('id')->on('shops');
             $table->dateTime('started_at');
             $table->dateTime('ended_at');
             $table->boolean('type')->default(0)->comment('0: percent, 1: fixed');

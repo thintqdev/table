@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Role;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class RoleSeeder extends Seeder
@@ -19,11 +18,11 @@ class RoleSeeder extends Seeder
 
         foreach ($data as $value) {
             Role::updateOrCreate([
-                'id' => $value['id']
+                'id' => $value['id'],
             ], [
                 'id' => $value['id'],
                 'name' => $value['name'],
-                'guard_name' => $value['guard_name']
+                'guard_name' => $value['guard_name'],
             ]);
         }
         $this->command->info('Data role seed success');

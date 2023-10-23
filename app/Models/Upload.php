@@ -16,7 +16,7 @@ class Upload extends Model
     protected $appends = ['temporary_url'];
 
     protected $fillable = [
-        'file_path', 'uploadable_id', 'uploadable_type', 'temporary_id'
+        'file_path', 'uploadable_id', 'uploadable_type', 'temporary_id',
     ];
 
     public function temporaryUrl(): Attribute
