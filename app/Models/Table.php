@@ -11,11 +11,16 @@ class Table extends Model
 
     protected $table = 'tables';
 
-    public const TABLE_FOLDER = 'tables/csv/';
+    protected $hidden = ['shop'];
 
     protected $fillable = [
         'name',
         'location',
         'shop_id'
     ];
+
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
 }

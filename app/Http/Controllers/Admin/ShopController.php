@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Shop;
 use App\Services\Admin\ShopService;
+use App\Services\VietnamProvinceService;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -52,5 +53,23 @@ class ShopController extends Controller
         $deleted = $shop->delete();
 
         return response()->apiSuccess($deleted);
+    }
+
+    public function getDataProvinceVietnamController()
+    {
+        $data = app(VietnamProvinceService::class)->getDataVietnamProvince();
+        return response()->apiSuccess($data);
+    }
+
+    public function getDataDistrictController($code)
+    {
+        $data = app(VietnamProvinceService::class)->getDataDistrictOfProvince($code);
+        return response()->apiSuccess($data);
+    }
+
+    public function getDataWardController($code)
+    {
+        $data = app(VietnamProvinceService::class)->getDataWardOfDistrict($code);
+        return response()->apiSuccess($data);
     }
 }

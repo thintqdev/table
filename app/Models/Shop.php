@@ -24,11 +24,6 @@ class Shop extends Model
         'latitude', 'longitude', 'open_hour', 'close_hour',
     ];
 
-    protected $casts = [
-        'open_hour' => 'time',
-        'close_hour' => 'time',
-    ];
-
     protected $hidden = ['password'];
 
     public function uploads()
@@ -44,5 +39,9 @@ class Shop extends Model
     public function qrStamps()
     {
         return $this->hasMany(QRStamp::class);
+    }
+
+    public function tables() {
+        return $this->hasMany(Table::class);
     }
 }

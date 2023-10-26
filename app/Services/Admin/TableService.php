@@ -5,17 +5,15 @@ namespace App\Services\Admin;
 use App\Imports\TableImport;
 use App\Jobs\ImportCsvTableJob;
 use App\Models\Table;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 
 class TableService extends AbstractService
 {
     public function getTables()
     {
-        $tables = Table::with('shop_id')
+        $tables = Table::with('shop')
             ->where('shop_id', $this->user()->shop_id)
-            ->paginate(config(config('const.paginate')));
+            ->paginate(config('const.paginate'));
 
         return $tables;
     }
@@ -37,10 +35,7 @@ class TableService extends AbstractService
     {
         try {
             \Log::debug('Import Table CSV [START]');
-            $fileName = now()->format('dmY_His').'_'.Str::random().'.'.$file->extension();
-            $filePath = Table::TABLE_FOLDER . $fileName;
-            Storage::disk('s3')->put($filePath, file_get_contents($file));
-            dispatch(new ImportCsvTableJob($filePath));
+            Excel::import(new TableImport($this->user()->shop_id), $file);
             \Log::debug('Import Table CSV [DONE]');
             return true;
         } catch (\Exception $e) {

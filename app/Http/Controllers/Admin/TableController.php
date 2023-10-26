@@ -3,16 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\TableImport;
+use App\Models\Table;
 use App\Services\Admin\TableService;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TableController extends Controller
 {
-//    protected $tableService;
-//    public function __construct(TableService $tableService)
-//    {
-//    }
-
     /**
      * Display a listing of the resource.
      *
@@ -20,12 +18,16 @@ class TableController extends Controller
      */
     public function index()
     {
+        $result = app(TableService::class)->getTables();
 
+        return response()->apiSuccess($result);
     }
 
     public function store(Request $request)
     {
-        //
+        $table = app(TableService::class)->createTable($request->all());
+
+        return response()->apiSuccess($table);
     }
 
     /**
@@ -35,9 +37,15 @@ class TableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Table $table)
     {
-        //
+        $result = app(TableService::class)->updateTable($table, $request->all());
+
+        if ($result) {
+            return response()->apiSuccess($result);
+        } else {
+            return response()->apiError($result);
+        }
     }
 
     /**
@@ -46,9 +54,9 @@ class TableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Table $table)
     {
-        //
+        return response()->apiSuccess($table->forceDelete());
     }
 
     public function import(Request $request)

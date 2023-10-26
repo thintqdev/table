@@ -40,6 +40,9 @@ Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
     });
 
     // Shop
+    Route::get('/shops/province', [ShopController::class, 'getDataProvinceVietnamController']);
+    Route::get('/shops/district/{code}', [ShopController::class, 'getDataDistrictController']);
+    Route::get('/shops/ward/{code}', [ShopController::class, 'getDataWardController']);
     Route::prefix('shops')->controller(ShopController::class)->group(function () {
         Route::post('/', 'create');
         Route::get('/', 'index');
@@ -65,4 +68,5 @@ Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
 
     // Table
     Route::post('/tables/import', [TableController::class, 'import']);
+    Route::resource('/tables', TableController::class)->except(['create', 'edit', 'show']);
 });
